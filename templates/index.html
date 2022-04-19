@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission to Mars</title>
+    <link 
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  />
+  <body style="background-color:#dcdcdc;">
+  <style>
+    html {
+      font-family: sans-serif;
+    }
+
+    table {
+      border-collapse: collapse;
+      border: 4px solid rgb(200,200,200);
+      letter-spacing: 1px;
+      font-size: 1.5rem;
+    }
+
+    td, th {
+      border: 2px solid rgb(190,190,190);
+      padding: 3px 5px;
+    }
+
+    td {
+      text-align: left;
+    }
+
+    caption {
+      padding: 1px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+            <div class="jumbotron text-center" style="background-image: url(https://marshemispheres.com/images/syrtis_major_enhanced-full.jpg); background-size: cover;">
+                <h1>Mission to Mars</h1>
+                <p><a class="btn btn btn-success" href="/scrape"
+                            role="button">Scrape New Data</a></p>
+            </div>
+    <!-- Mars News -->
+                <div class="row" id="mars-news">
+                    <div class="col-md-12">
+                        <div class="media">
+                            <div class="media-body"></div>
+                                <h2>Latest Mars News</h2>
+                                <h4 class="media-heading">{{mars.news_title}}</h4>
+                                <p>{{ mars.news_paragraph }}</p>
+                        </div>
+                    </div>
+
+                </div>
+            
+    <!-- Featured Image -->
+    <!-- First level -->
+            <div class="row" id="mars-featured-image">
+
+                <!-- Second level -->
+
+                    <div class="col-md-8">
+                
+                        <h2>Featured Mars Image</h2>
+                    
+                        <img src="{{ mars.featured_image }}" 
+                        class="img-responsive" 
+                        alt="Responsive image"
+                        />
+                    </div>
+                    <!-- Mars Facts -->
+                        <div class="col-md-4">
+                            <!-- Mars Facts -->
+                            <div class="row" id="mars-facts">
+                                <h2>Mars Facts</h2>
+                                <table class="table">{{ mars.facts | safe }}</table> 
+                            </div>
+                    
+                        </div>
+            </div>
+         
+
+        <!-- Section for Mars Hemispheres -->
+        
+            <div class="row" id="mars-hemispheres">
+                <div>
+                    <h2 class="text-center">Mars Hemispheres</h2>
+                </div>
+            {% for hemisphere in mars.hemispheres %}
+        
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="thumbnail">
+                    <img src="{{hemisphere.img_url | default('static/images/error.png', true)}}" alt="..." class="img-thumbnail" style="width:100%">
+                        <div class="captiom">
+                            <h3>{{hemisphere.title}}</h3>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+             </div>
+        </div>
+</body>
+</html>
